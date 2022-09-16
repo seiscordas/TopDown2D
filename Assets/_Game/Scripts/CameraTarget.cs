@@ -19,12 +19,9 @@ namespace kl
         {
             float targetOffsetX = KeyboardInput.MoveInput.x * cameraTargetOffset;
             float targetOffsetY = KeyboardInput.MoveInput.y * cameraTargetOffset;
-            //float targetOffsetX = (characterControl.FacingRight) ? cameraTargetOffset : -cameraTargetOffset;
-            //float targetOffsetY = (characterControl.FacingUp) ? cameraTargetOffset : -cameraTargetOffset;
             float currentOffsetX = Mathf.Lerp(cameraTarget.localPosition.x, targetOffsetX, Time.fixedDeltaTime * cameraTargetFlipSpeed);
             float currentOffsetY = Mathf.Lerp(cameraTarget.localPosition.y, targetOffsetY, Time.fixedDeltaTime * cameraTargetFlipSpeed);
             cameraTarget.localPosition = new Vector3(currentOffsetX, currentOffsetY, cameraTarget.localPosition.z);
-            Debug.Log(currentOffsetX +"///"+ currentOffsetY);
         }
     }
 }

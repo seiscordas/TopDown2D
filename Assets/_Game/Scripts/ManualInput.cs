@@ -16,6 +16,7 @@ namespace kl
             characterControl.MoveX = VirtualInputManager.Instance.MoveX;
             characterControl.MoveY = VirtualInputManager.Instance.MoveY;
             characterControl.Jump = VirtualInputManager.Instance.Jump;
+            characterControl.Attack = VirtualInputManager.Instance.Attack;
         }
     }
 }

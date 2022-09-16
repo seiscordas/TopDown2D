@@ -20,7 +20,7 @@ namespace kl
             characterControl.transform.Translate(Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.fixedDeltaTime * KeyboardInput.MoveInput);
             characterControl.FacingRight = KeyboardInput.MoveInput.x > 0;
             characterControl.FacingUp = KeyboardInput.MoveInput.y > 0;
-            animator.SetBool(TransitionParameter.Move.ToString(), KeyboardInput.MoveInput.x != 0 || KeyboardInput.MoveInput.y != 0);
+            animator.SetBool(TransitionParameter.Move.ToString(), characterControl.MoveX || characterControl.MoveY);
             animator.SetFloat(TransitionParameter.MoveX.ToString(), KeyboardInput.MoveInput.x);
             animator.SetFloat(TransitionParameter.MoveY.ToString(), KeyboardInput.MoveInput.y);
         }

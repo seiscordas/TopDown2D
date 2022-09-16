@@ -22,5 +22,9 @@ namespace kl
             VirtualInputManager.Instance.MoveY = moveInput.y > 0 || moveInput.y < 0;
             VirtualInputManager.Instance.Jump = (Input.GetKey(KeyCode.Space));
         }
+        //private void OnAttackInput(InputAction.CallbackContext obj)
+        //{
+        //    Debug.Log("Do Attack!");
+        //}
     }
 }
