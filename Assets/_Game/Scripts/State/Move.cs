@@ -17,11 +17,9 @@ namespace kl
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl characterControl = characterState.GetCharacterControl(animator);
-            Rigidbody2D rb = characterControl.GetComponent<Rigidbody2D>();
-            if (characterControl.MoveX || characterControl.MoveY)
-            {
-                characterControl.transform.Translate(Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.fixedDeltaTime * KeyboardInput.MoveInput);
-            }
+            characterControl.transform.Translate(Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.fixedDeltaTime * KeyboardInput.MoveInput);
+            characterControl.FacingRight = KeyboardInput.MoveInput.x > 0;
+            characterControl.FacingUp = KeyboardInput.MoveInput.y > 0;
             animator.SetBool(TransitionParameter.Move.ToString(), KeyboardInput.MoveInput.x != 0 || KeyboardInput.MoveInput.y != 0);
             animator.SetFloat(TransitionParameter.MoveX.ToString(), KeyboardInput.MoveInput.x);
             animator.SetFloat(TransitionParameter.MoveY.ToString(), KeyboardInput.MoveInput.y);

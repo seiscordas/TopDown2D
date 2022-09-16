@@ -9,9 +9,7 @@ namespace kl
         [SerializeField] private CharacterControl characterControl;
         [SerializeField] private Transform cameraTarget;
         [Range(0f, 5f)]
-        [SerializeField] float cameraTargetOffsetX = 2f;
-        [Range(0f, 5f)]
-        [SerializeField] float cameraTargetOffsetY = 2f;
+        [SerializeField] float cameraTargetOffset = 2f;
         [Range(0.5f, 50f)]
         [SerializeField] float cameraTargetFlipSpeed = 2f;
         [Range(0f, 5f)]
@@ -19,11 +17,14 @@ namespace kl
 
         private void FixedUpdate()
         {
-            float currentOffsetX = Mathf.Lerp(cameraTarget.localPosition.x, cameraTargetOffsetX, Time.fixedDeltaTime * cameraTargetFlipSpeed);
-            float currentOffsetY = Mathf.Lerp(cameraTarget.localPosition.y, cameraTargetOffsetY, Time.fixedDeltaTime * cameraTargetFlipSpeed);
-
-            currentOffsetX += Time.fixedDeltaTime * characterSpeedInfluence;
-            cameraTarget.localPosition = new Vector3(currentOffsetX, cameraTarget.localPosition.y, cameraTarget.localPosition.z);
+            float targetOffsetX = KeyboardInput.MoveInput.x * cameraTargetOffset;
+            float targetOffsetY = KeyboardInput.MoveInput.y * cameraTargetOffset;
+            //float targetOffsetX = (characterControl.FacingRight) ? cameraTargetOffset : -cameraTargetOffset;
+            //float targetOffsetY = (characterControl.FacingUp) ? cameraTargetOffset : -cameraTargetOffset;
+            float currentOffsetX = Mathf.Lerp(cameraTarget.localPosition.x, targetOffsetX, Time.fixedDeltaTime * cameraTargetFlipSpeed);
+            float currentOffsetY = Mathf.Lerp(cameraTarget.localPosition.y, targetOffsetY, Time.fixedDeltaTime * cameraTargetFlipSpeed);
+            cameraTarget.localPosition = new Vector3(currentOffsetX, currentOffsetY, cameraTarget.localPosition.z);
+            Debug.Log(currentOffsetX +"///"+ currentOffsetY);
         }
     }
 }
