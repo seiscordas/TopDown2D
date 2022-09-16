@@ -1,23 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace kl
 {
-    [CreateAssetMenu(fileName = "New State Idle", menuName = "KL/AbilityData/Idle")]
-    public class Idle : StateData
+    [CreateAssetMenu(fileName = "New State Move", menuName = "KL/AbilityData/Move")]
+    public class Move : StateData
     {
+        public AnimationCurve SpeedGraph;
+        public float Speed;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
             CharacterControl characterControl = characterState.GetCharacterControl(animator);
-
-            if (characterControl.Jump)
+            Rigidbody2D rb = characterControl.GetComponent<Rigidbody2D>();
+            if (characterControl.MoveX || characterControl.MoveY)
             {
-                animator.SetBool(TransitionParameter.Jump.ToString(), value: true);
+                characterControl.transform.Translate(Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.fixedDeltaTime * KeyboardInput.MoveInput);
             }
             animator.SetBool(TransitionParameter.Move.ToString(), KeyboardInput.MoveInput.x != 0 || KeyboardInput.MoveInput.y != 0);
             animator.SetFloat(TransitionParameter.MoveX.ToString(), KeyboardInput.MoveInput.x);
@@ -25,6 +28,7 @@ namespace kl
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+
         }
     }
 }

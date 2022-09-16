@@ -19,10 +19,11 @@ namespace kl
 
         private void FixedUpdate()
         {
-            float currentOffsetX = Mathf.Lerp(cameraTarget.localPosition.z, cameraTargetOffsetX, Time.fixedDeltaTime * cameraTargetFlipSpeed);
+            float currentOffsetX = Mathf.Lerp(cameraTarget.localPosition.x, cameraTargetOffsetX, Time.fixedDeltaTime * cameraTargetFlipSpeed);
+            float currentOffsetY = Mathf.Lerp(cameraTarget.localPosition.y, cameraTargetOffsetY, Time.fixedDeltaTime * cameraTargetFlipSpeed);
 
             currentOffsetX += Time.fixedDeltaTime * characterSpeedInfluence;
-            //cameraTarget.localPosition = new Vector3(cameraTarget.localPosition.x, cameraTarget.localPosition.y, currentOffsetZ);
+            cameraTarget.localPosition = new Vector3(currentOffsetX, cameraTarget.localPosition.y, cameraTarget.localPosition.z);
         }
     }
 }

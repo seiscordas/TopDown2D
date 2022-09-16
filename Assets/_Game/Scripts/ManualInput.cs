@@ -13,10 +13,8 @@ namespace kl
 
         private void Update()
         {
-            characterControl.MoveRight = VirtualInputManager.Instance.MoveRight;
-            characterControl.MoveLeft = VirtualInputManager.Instance.MoveLeft;
-            characterControl.MoveUp = VirtualInputManager.Instance.MoveUp;
-            characterControl.MoveDown = VirtualInputManager.Instance.MoveDown;
+            characterControl.MoveX = VirtualInputManager.Instance.MoveX;
+            characterControl.MoveY = VirtualInputManager.Instance.MoveY;
             characterControl.Jump = VirtualInputManager.Instance.Jump;
         }
     }

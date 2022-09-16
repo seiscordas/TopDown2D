@@ -2,7 +2,7 @@ public interface IDamageable<T>
 {
     
 }
-public interface IShotHit
+public interface IAtack
 {
     void Hit();
 }
