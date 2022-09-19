@@ -8,7 +8,7 @@ namespace kl
     {
         void Start()
         {
-            StartCoroutine(TempWalk());
+            
         }
 
         void Update()
@@ -16,13 +16,6 @@ namespace kl
 
         }
 
-        IEnumerator TempWalk()
-        {
-            yield return new WaitForSeconds(1);
-            VirtualInputManager.Instance.MoveX = true;
-            VirtualInputManager.Instance.MoveY = true;
-            VirtualInputManager.Instance.Jump = false;
-            Debug.Log("teste");
-        }
+        
     }
 }
