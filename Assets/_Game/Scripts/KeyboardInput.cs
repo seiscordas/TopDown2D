@@ -1,30 +1,38 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace kl
 {
     public class KeyboardInput : MonoBehaviour
     {
-        private PlayerInputActions _inputActions;
-        private static Vector2 moveInput;
+        private CharacterControl characterControl;
+        private PlayerInputActions inputActions;
+        private Vector2 moveInput;
 
-        public static Vector2 MoveInput { get => moveInput; }
-
-        private void Awake()
+        private void Start()
         {
-            _inputActions = new PlayerInputActions();
-            _inputActions.PlayerControls.Enable();
-            //_inputActions.PlayerControls.Attack.performed += OnAttackInput;
+            characterControl = this.GetComponent<CharacterControl>();
+            inputActions = new PlayerInputActions();
+            inputActions.PlayerControls.Enable();
+            inputActions.PlayerControls.Attack.performed += OnAttackInput;
+        }
+        private void OnDisable()
+        {
+            if (inputActions != null)
+                inputActions.PlayerControls.Attack.performed -= OnAttackInput;
         }
         void Update()
         {
-            moveInput = _inputActions.PlayerControls.Movement.ReadValue<Vector2>();
-            VirtualInputManager.Instance.MoveX = moveInput.x > 0 || moveInput.x < 0;
-            VirtualInputManager.Instance.MoveY = moveInput.y > 0 || moveInput.y < 0;
-            VirtualInputManager.Instance.Jump = (Input.GetKey(KeyCode.Space));
+            moveInput = inputActions.PlayerControls.Movement.ReadValue<Vector2>();
+            characterControl.MoveInput = moveInput;
+
+            characterControl.MoveX = moveInput.x > 0 || moveInput.x < 0;
+            characterControl.MoveY = moveInput.y > 0 || moveInput.y < 0;
+            //characterControl.Jump   = (Input.GetKey(KeyCode.Space));
         }
-        //private void OnAttackInput(InputAction.CallbackContext obj)
-        //{
-        //    Debug.Log("Do Attack!");
-        //}
+        private void OnAttackInput(InputAction.CallbackContext obj)
+        {
+            characterControl.Attack = true;
+        }
     }
 }

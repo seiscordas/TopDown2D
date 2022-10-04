@@ -21,8 +21,6 @@ namespace kl
             if (characterControl.MoveX || characterControl.MoveY)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
-                //SetFloat(TransitionParameter.MoveX.ToString(), KeyboardInput.MoveInput.x);
-                //animator.SetFloat(TransitionParameter.MoveY.ToString(), KeyboardInput.MoveInput.y);
             }
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

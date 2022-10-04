@@ -4,41 +4,53 @@ using Pada1.BBCore.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace kl
 {
     [Action("Game/DrabonPatrol")]
     public class DragonPatrol : BasePrimitiveAction
     {
-        [InParam("AIController")]
-        private EnemyAICrontroller aiController;
+        [InParam("EnemyAIController")]
+        private EnemyAIController enemyAIController;
+
+        [InParam("TargetPatrolDistance")]
+        private float targetPatrolDistance;
+
+        private int wayPointIndex;
 
         public override void OnStart()
         {
             base.OnStart();
-            Debug.Log("Patrol: OnStart");
-            aiController.StartCoroutine(TempWalk());
+            enemyAIController.StartCoroutine(Patrol());
         }
 
         public override TaskStatus OnUpdate()
         {
-            Debug.Log("Patrol: OnUpdate");
             return TaskStatus.RUNNING;
         }
 
         public override void OnAbort()
         {
             base.OnAbort();
-
-            aiController.StopAllCoroutines();
+            enemyAIController.StopAllCoroutines();
         }
 
-        IEnumerator TempWalk()
+        IEnumerator Patrol()
         {
-            yield return new WaitForSeconds(1);
-            VirtualInputManager.Instance.MoveX = true;
-            VirtualInputManager.Instance.MoveY = true;
-            VirtualInputManager.Instance.Jump = false;
+            wayPointIndex = Random.Range(0, enemyAIController.WayPoints.Count);
+            yield return new WaitForSeconds(wayPointIndex);
+            while (true)
+            {
+                enemyAIController.Move(enemyAIController.WayPoints[wayPointIndex], enemyAIController.PatrolSpeed, targetPatrolDistance);
+                yield return new WaitForSeconds(seconds: 0.01f);
+                if (enemyAIController.AtTarget)
+                {
+                    yield return new WaitForSeconds(wayPointIndex);
+                    wayPointIndex = Random.Range(0, enemyAIController.WayPoints.Count);
+                    enemyAIController.AtTarget = false;
+                }
+            }
         }
     }
 }

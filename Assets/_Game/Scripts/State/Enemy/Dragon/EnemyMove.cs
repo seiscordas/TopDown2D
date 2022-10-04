@@ -15,13 +15,20 @@ namespace kl
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //CharacterControl characterControl = characterState.GetCharacterControl(animator);
-            //characterControl.transform.Translate(Speed * Time.fixedDeltaTime * KeyboardInput.MoveInput);
-            //characterControl.FacingRight = KeyboardInput.MoveInput.x > 0;
-            //characterControl.FacingUp = KeyboardInput.MoveInput.y > 0;
-            //animator.SetBool(TransitionParameter.Move.ToString(), characterControl.MoveX || characterControl.MoveY);
-            //animator.SetFloat(TransitionParameter.MoveX.ToString(), KeyboardInput.MoveInput.x);
-            //animator.SetFloat(TransitionParameter.MoveY.ToString(), KeyboardInput.MoveInput.y);
+            CharacterControl characterControl = characterState.GetCharacterControl(animator);
+            Vector2 moveAxis = characterControl.GetComponent<EnemyAIController>().MoveAxis;
+            if (moveAxis.x != 0 || moveAxis.y != 0)
+            {
+                animator.SetBool(TransitionParameter.Move.ToString(), true);
+                animator.SetFloat(TransitionParameter.MoveX.ToString(), moveAxis.x);
+                animator.SetFloat(TransitionParameter.MoveY.ToString(), moveAxis.y);
+                characterControl.SetFaceDirection(moveAxis.x, moveAxis.y);                
+            }
+            else
+            {
+                animator.SetBool(TransitionParameter.Move.ToString(), false);
+            }
+
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
