@@ -111,7 +111,7 @@ TextureImporter:
       213: 5898155415433455342
     second: sword
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -171,6 +171,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -204,6 +205,18 @@ TextureImporter:
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 100
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -978,17 +991,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      coin_pickup_2: 5849325189442884660
-      xp_bar: -5884573130030058871
+      chest_2: 8333231276030249781
       coin_pickup_1: -4922617476772045510
       chest_0: 1753205982242350755
       hud_heart_2: 5197925540072060383
       chest_3: -4430392651179603617
       hud_heart_1: 2002165265138813586
-      hud_heart_3: 1423833454339779461
+      sword: 5898155415433455342
       bush_2: 5069650035751226587
       bush_0: 2654447934904345190
-      sword: 5898155415433455342
       equipped_item_thumb: -8841936248928892492
       hud_with_xp: 2197855871317943228
       hear_pickup_0: -3201709878794754465
@@ -1007,13 +1018,15 @@ TextureImporter:
       objects_17: -6050296909894318094
       level_1: 741922582067912797
       coin_pickup_3: 8753186556605219898
-      bush_3: -9053378900703536071
+      coin_pickup_2: 5849325189442884660
+      hud_heart_3: 1423833454339779461
       hear_pickup_3: -6883905864151536645
+      bush_3: -9053378900703536071
       jar_break_3: 6639657697291588988
-      coin_pickup_0: 7206194005228167239
       hear_pickup_2: -6580861909127892675
       jar_break_1: 4455232240493665095
-      chest_2: 8333231276030249781
+      coin_pickup_0: 7206194005228167239
+      xp_bar: -5884573130030058871
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

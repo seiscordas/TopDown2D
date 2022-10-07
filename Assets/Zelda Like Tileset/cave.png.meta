@@ -354,7 +354,7 @@ TextureImporter:
       213: -8595085336731705422
     second: cave_116
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -414,6 +414,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -441,6 +442,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -2992,11 +3005,11 @@ TextureImporter:
       cave_82: -4896528378060453493
       cave_37: -8154601068000034250
       cave_5: -3057643256220601266
-      cave_9: -7693048406743456309
-      cave_52: -5951506096933670981
-      cave_108: -4978113134295867063
-      cave_87: -2674749556932810017
       cave_104: -4805241856653229652
+      cave_52: -5951506096933670981
+      cave_9: -7693048406743456309
+      cave_87: -2674749556932810017
+      cave_108: -4978113134295867063
       cave_57: 6441568383294751788
       cave_113: 5514993938975937009
       cave_20: 7840702335472221307
