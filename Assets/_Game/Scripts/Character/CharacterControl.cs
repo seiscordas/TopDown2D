@@ -30,6 +30,7 @@ namespace kl
         public bool FacingRight { get => facingRight; set => facingRight = value; }
         public bool Attack { get => attack; set => attack = value; }
         public bool Dead { get => dead; set => dead = value; }
+        public virtual bool Interact { get; internal set; }
 
         public void SetFaceDirection(float x, float y)
         {
