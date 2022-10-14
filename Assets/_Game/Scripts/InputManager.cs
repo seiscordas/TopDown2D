@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace kl
 {
-    public class InputManger : MonoBehaviour
+    public class InputManager : MonoBehaviour
     {
         private CharacterControl characterControl;
         private PlayerInputActions inputActions;

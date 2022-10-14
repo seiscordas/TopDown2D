@@ -37,7 +37,6 @@ namespace DialogueSystem
 
         private void VariableChanged(string name, Ink.Runtime.Object value)
         {
-            Debug.Log("Variable changed: " + name + " = " + value);
             if (Variables.ContainsKey(name))
             {
                 Variables.Remove(name);

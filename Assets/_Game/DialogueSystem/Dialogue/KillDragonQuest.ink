@@ -2,7 +2,7 @@ INCLUDE Globals.ink
 -> main
 
 === main ===
-Please man help us, can you kill the might dragon on the field?
+Can help us by killing the mighty dragon in the field?
 ->choices
 
 === choices ===
@@ -13,7 +13,9 @@ Please man help us, can you kill the might dragon on the field?
         ->chosenYes
 
 === chosenYes ===
-thank you for chose help us! You have to hit on its head and run from its fire.
+thanks man!
+Take this letter and give it to the king
+Remember! You have to hit on the dragons head and run from its fire.
 
 ->DONE 
 

@@ -15,6 +15,7 @@ namespace DialogueSystem
     {
         public static event Action OnDialogueEnter = delegate { };
         public static event Action OnDialogueExit = delegate { };
+        public static event Action OnDialogueFinish = delegate { };
 
         [Header("Params")]
         [SerializeField] private InkFile globalInkFile;
@@ -30,7 +31,6 @@ namespace DialogueSystem
 
         [SerializeField] private Story currentStory;
         public bool DialogueIsPlaying { get; private set; }
-        public static Action OnFinishDialogue { get; internal set; }
 
         private static DialogueManager instance;
         private DialogueVariables dialogueVariables;
@@ -91,9 +91,7 @@ namespace DialogueSystem
 
             ContinueStrory();
 
-            //PutInListenerDialogueChoies();
-
-            InputManger.OnSubmitPressed += ContinueStrory;
+            InputManager.OnSubmitPressed += ContinueStrory;
             OnDialogueEnter?.Invoke();
         }
 
@@ -102,12 +100,16 @@ namespace DialogueSystem
             DialogueIsPlaying = false;
             dialoguePanel.SetActive(false);
             dialogueText.text = "";
-            InputManger.OnSubmitPressed -= ContinueStrory;
+            InputManager.OnSubmitPressed -= ContinueStrory;
             OnDialogueExit?.Invoke();
 
             dialogueVariables.StopListenig(currentStory);
 
-            //RemoveFromListenerDialogueChoies();
+            bool accepQuest = ((Ink.Runtime.BoolValue)GetVariableState("acceptQuest")).value;
+            if (accepQuest)
+            {
+                FinishedDialogue();
+            }
         }
 
         private void DisplayChoices()
@@ -148,23 +150,6 @@ namespace DialogueSystem
             EventSystem.current.SetSelectedGameObject(choices[0]);
         }
 
-        //private void PutInListenerDialogueChoies()
-        //{
-        //    for (int i = 0; i < choices.Length; i++)
-        //    {
-        //        int index = i;
-        //        choices[i].GetComponent<Button>().onClick.AddListener(() => DialogueChosen(index));
-        //    }
-        //}
-        //private void RemoveFromListenerDialogueChoies()
-        //{
-        //    for (int i = 0; i < choices.Length; i++)
-        //    {
-        //        int index = i;
-        //        choices[i].GetComponent<Button>().onClick.RemoveListener(() => DialogueChosen(index));
-        //    }
-        //}
-
         public void DialogueChosen(int index)
         {
             currentStory.ChooseChoiceIndex(index);
@@ -188,9 +173,9 @@ namespace DialogueSystem
             return variableValue;
         }
 
-        private void FinishDialogue()
-        {
-            OnFinishDialogue?.Invoke();
+        private void FinishedDialogue()
+        {            
+            OnDialogueFinish?.Invoke();
         }
     }
 }

@@ -1,7 +1,4 @@
 using kl;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DialogueSystem
@@ -11,30 +8,28 @@ namespace DialogueSystem
         [SerializeField] private GameObject visualCue;
         [SerializeField] private TextAsset inkJSON;
 
-        private bool playerInRange;
-
-        private void Awake()
-        {
-            playerInRange = false;
-            visualCue.SetActive(false);
-            DialogueManager.OnFinishDialogue += DisableCollider;
-        }
-
-        private void Update()
-        {
-            if (playerInRange)
-            {
-                visualCue.SetActive(true);
-            }
-            else { visualCue.SetActive(false); }
-        }
+        private bool isDialogueFinished = false;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (isDialogueFinished)
+                return;
+
             if (collision.gameObject.CompareTag("Player"))
             {
-                InputManger.OnInteractPressed += LoadInkJSON;
-                playerInRange = true;
+                visualCue.SetActive(true);
+                InputManager.OnInteractPressed += LoadInkJSON;
+                DialogueManager.OnDialogueFinish += SetFinishedDialogue;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                visualCue.SetActive(false);
+                InputManager.OnInteractPressed -= LoadInkJSON;
+                DialogueManager.OnDialogueFinish -= SetFinishedDialogue;
             }
         }
 
@@ -43,18 +38,9 @@ namespace DialogueSystem
             DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        private void SetFinishedDialogue()
         {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                InputManger.OnInteractPressed -= LoadInkJSON;
-                playerInRange = false;
-            }
-        }
-
-        private void DisableCollider()
-        {
-            GetComponent<Collider>().enabled = false;
+            isDialogueFinished = true;
         }
     }
 }
