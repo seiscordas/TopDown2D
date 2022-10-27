@@ -3,19 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Sword
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - No Collider
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Item
+  - NPC
+  - Enemy
+  - Weapon
   - 
   - 
   - 
@@ -49,4 +50,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3492667949
+    locked: 0
+  - name: Top
+    uniqueID: 2332722979
     locked: 0

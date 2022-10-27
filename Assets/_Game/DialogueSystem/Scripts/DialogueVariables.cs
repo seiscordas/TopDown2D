@@ -12,6 +12,8 @@ namespace DialogueSystem
 
         public DialogueVariables(string globalsFilePath)
         {
+            if(globalsFilePath == null)
+                return;
             string inkFileContents = File.ReadAllText(globalsFilePath);
             Ink.Compiler compiler = new(inkFileContents);
             Story globalVariablesStory = compiler.Compile();
@@ -20,7 +22,8 @@ namespace DialogueSystem
             foreach (string name in globalVariablesStory.variablesState)
             {
                 Ink.Runtime.Object value = globalVariablesStory.variablesState.GetVariableWithName(name);
-                Variables.Add(name, value);
+                if (value != null)
+                    Variables.Add(name, value);
             }
         }
 

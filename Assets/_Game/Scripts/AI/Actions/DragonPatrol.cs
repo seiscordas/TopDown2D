@@ -44,11 +44,11 @@ namespace kl
             {
                 enemyAIController.Move(enemyAIController.WayPoints[wayPointIndex], enemyAIController.PatrolSpeed, targetPatrolDistance);
                 yield return new WaitForSeconds(seconds: 0.01f);
-                if (enemyAIController.AtTarget)
+                if (enemyAIController.IsAtTarget)
                 {
                     yield return new WaitForSeconds(wayPointIndex);
                     wayPointIndex = Random.Range(0, enemyAIController.WayPoints.Count);
-                    enemyAIController.AtTarget = false;
+                    enemyAIController.IsAtTarget = false;
                 }
             }
         }

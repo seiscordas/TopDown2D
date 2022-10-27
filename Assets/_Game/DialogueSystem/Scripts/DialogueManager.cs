@@ -73,7 +73,15 @@ namespace DialogueSystem
             if (currentStory.canContinue)
             {
                 dialogueText.text = currentStory.Continue();
-                DisplayChoices();
+                if (currentStory.currentChoices.Count > 0)
+                {
+                    DisplayChoices();
+                }
+                else
+                {
+                    ToggleShowContinueButtom(true);
+                    HideChoiceButtons(0);
+                }
             }
             else
             {
@@ -104,24 +112,18 @@ namespace DialogueSystem
             OnDialogueExit?.Invoke();
 
             dialogueVariables.StopListenig(currentStory);
-
-            bool accepQuest = ((Ink.Runtime.BoolValue)GetVariableState("acceptQuest")).value;
-            if (accepQuest)
-            {
-                FinishedDialogue();
-            }
         }
 
         private void DisplayChoices()
         {
             List<Choice> currentChoices = currentStory.currentChoices;
-
             if (currentChoices.Count > choices.Length)
             {
                 Debug.LogError("More choices were fiven than the UI can support. Number of choices given: " + currentChoices.Count);
             }
             EnableAndInitializeChoicesButtom(currentChoices);
             StartCoroutine(SelectFirstChoice());
+            ToggleShowContinueButtom(false);
         }
 
         private void EnableAndInitializeChoicesButtom(List<Choice> currentChoices)
@@ -135,7 +137,7 @@ namespace DialogueSystem
             }
         }
 
-        private void HiddenChoiceButtons(int index)
+        private void HideChoiceButtons(int index)
         {
             for (int i = index; i < choices.Length; i++)
             {
@@ -150,17 +152,18 @@ namespace DialogueSystem
             EventSystem.current.SetSelectedGameObject(choices[0]);
         }
 
+        /// Calling on UI
         public void DialogueChosen(int index)
         {
             currentStory.ChooseChoiceIndex(index);
             ContinueStrory();
-            HiddenChoiceButtons(0);
-            ShowContinueButtom();
+            HideChoiceButtons(0);
+            ToggleShowContinueButtom(true);
         }
 
-        private void ShowContinueButtom()
+        private void ToggleShowContinueButtom(bool active)
         {
-            continueButtom.SetActive(true);
+            continueButtom.SetActive(active);
         }
 
         public Ink.Runtime.Object GetVariableState(string variableName)
@@ -173,8 +176,8 @@ namespace DialogueSystem
             return variableValue;
         }
 
-        private void FinishedDialogue()
-        {            
+        public void FinishedDialogue()
+        {
             OnDialogueFinish?.Invoke();
         }
     }

@@ -75,7 +75,6 @@ namespace kl
         private void AttackButtonPressed(InputAction.CallbackContext obj)
         {
             characterControl.Attack = true;
-            Debug.Log("Attack");
             OnAttackPressed?.Invoke();
         }
 

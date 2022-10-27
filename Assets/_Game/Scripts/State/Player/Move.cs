@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,10 @@ namespace kl
         {
             CharacterControl characterControl = characterState.GetCharacterControl(animator);
             characterControl.transform.Translate(Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.fixedDeltaTime * characterControl.MoveInput);
+            if (characterControl.Attack)
+            {
+                animator.SetBool(TransitionParameter.Attack.ToString(), true);
+            }
             if (characterControl.MoveInput.x != 0 || characterControl.MoveInput.y != 0)
             {
                 animator.SetFloat(TransitionParameter.MoveX.ToString(), characterControl.MoveInput.x);
@@ -29,6 +34,7 @@ namespace kl
                 animator.SetBool(TransitionParameter.Move.ToString(), false);
             }
         }
+
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 

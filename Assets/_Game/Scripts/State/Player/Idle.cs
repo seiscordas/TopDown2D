@@ -13,6 +13,10 @@ namespace kl
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl characterControl = characterState.GetCharacterControl(animator);
+            if (characterControl.Attack)
+            {
+                animator.SetBool(TransitionParameter.Attack.ToString(), true);
+            }
             if (characterControl.Jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), value: true);

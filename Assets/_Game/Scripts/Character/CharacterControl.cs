@@ -7,7 +7,10 @@ namespace kl
 {
     public class CharacterControl : MonoBehaviour
     {
-        public Animator Animator;
+        //public Animator Animator;
+
+        [SerializeField] private Transform root;
+
         [SerializeField] private bool moveX;
         [SerializeField] private bool moveY;
         [SerializeField] private bool jump;
@@ -31,6 +34,7 @@ namespace kl
         public bool Attack { get => attack; set => attack = value; }
         public bool Dead { get => dead; set => dead = value; }
         public virtual bool Interact { get; internal set; }
+        public Transform Root { get => root; set => root = value; }
 
         public void SetFaceDirection(float x, float y)
         {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a50cb9eaeb5abf4983c382eb0dad029, type: 3}
   m_Name: Letter
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: LetterKillDragon
+  id: KillDragonLetter
+  itemName: Kill Dragon Letter
   value: 1
   icon: {fileID: 577813105, guid: 117d8a1887728b84e827e3ca853f4693, type: 3}

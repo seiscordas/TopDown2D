@@ -19,7 +19,7 @@ namespace kl
             Vector2 moveAxis = characterControl.GetComponent<EnemyAIController>().MoveAxis;
             if (moveAxis.x != 0 || moveAxis.y != 0)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
+                //animator.SetBool(TransitionParameter.Move.ToString(), true);
                 animator.SetFloat(TransitionParameter.MoveX.ToString(), moveAxis.x);
                 animator.SetFloat(TransitionParameter.MoveY.ToString(), moveAxis.y);
                 characterControl.SetFaceDirection(moveAxis.x, moveAxis.y);                

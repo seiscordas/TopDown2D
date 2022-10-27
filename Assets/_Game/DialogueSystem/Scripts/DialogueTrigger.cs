@@ -1,14 +1,21 @@
 using kl;
+using System;
 using UnityEngine;
 
 namespace DialogueSystem
 {
     public class DialogueTrigger : MonoBehaviour
     {
+        public static event Action OnDialogueRenge = delegate { };
         [SerializeField] private GameObject visualCue;
         [SerializeField] private TextAsset inkJSON;
+        [SerializeField] private TextAsset defaultInkJSON;
+
+        [SerializeField] private bool defaultDialogue = true;
 
         private bool isDialogueFinished = false;
+
+        public virtual bool DefaultDialogue { get => defaultDialogue; set => defaultDialogue = value; }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -20,6 +27,7 @@ namespace DialogueSystem
                 visualCue.SetActive(true);
                 InputManager.OnInteractPressed += LoadInkJSON;
                 DialogueManager.OnDialogueFinish += SetFinishedDialogue;
+                OnDialogueRenge?.Invoke();
             }
         }
 
@@ -35,7 +43,15 @@ namespace DialogueSystem
 
         private void LoadInkJSON()
         {
-            DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+            if (defaultDialogue)
+            {
+                DialogueManager.GetInstance().EnterDialogueMode(defaultInkJSON);
+            }
+            else
+            {
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+            }            
+            InputManager.OnInteractPressed -= LoadInkJSON;
         }
 
         private void SetFinishedDialogue()

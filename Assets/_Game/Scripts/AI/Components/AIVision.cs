@@ -19,18 +19,18 @@ namespace kl
             characterControl = GetComponent<CharacterControl>();
         }
 
-        public bool IsVisible(GameObject target)
+        public bool IsVisible(Transform target)
         {
             if (target == null)
             {
                 return false;
             }
-            if (Vector2.Distance(transform.position, target.transform.position) > visionRange)
+            if (Vector2.Distance(transform.position, target.position) > visionRange)
             {
                 return false;
             }
 
-            Vector2 toTarget = target.transform.position - transform.position;
+            Vector2 toTarget = target.position - transform.position;
             Vector2 visionDirection = GetFaceDirection();
 
             if (Vector2.Angle(visionDirection, toTarget) > visionAngle / 2)

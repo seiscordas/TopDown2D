@@ -11,7 +11,7 @@ using UnityEngine;
 public class IsTargetVisible : GOCondition
 {
     [InParam("Target")]
-    private GameObject target;
+    private Transform target;
 
     [InParam("AIVision")]
     private AIVision aiVision;
@@ -19,11 +19,14 @@ public class IsTargetVisible : GOCondition
     [InParam("TargetMemoryDuration")]
     private float targetMemoryDuration;
 
+    [InParam("EnemyAIController")]
+    private EnemyAIController enemyAIController;
+
     private float forgetTargetTime;
 
     public override bool Check()
     {
-        if (aiVision.IsVisible(target))
+        if (aiVision.IsVisible(target) && !enemyAIController.IsAtTarget)
         {
             forgetTargetTime = Time.time + targetMemoryDuration;
             return true;
