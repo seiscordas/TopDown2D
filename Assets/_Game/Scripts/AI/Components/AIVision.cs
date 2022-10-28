@@ -43,7 +43,6 @@ namespace kl
 
         private void OnDrawGizmosSelected()
         {
-
             Gizmos.DrawWireSphere(transform.position, visionRange);
             Vector3 visionDirection = GetFaceDirection();
             Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, visionAngle / 2) * visionDirection * visionRange);

@@ -18,23 +18,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         damageable = GetComponent<IDamageable>();
-        damageable.DamageEvent += OnDamageable;
-    }
-
-    private void Update()
-    {
-
+        damageable.DeathEvent += OnDeath;
     }
 
     private void OnDestroy()
     {
         if (damageable != null)
         {
-            damageable.DamageEvent -= OnDamageable;
+            damageable.DeathEvent -= OnDeath;
         }
     }
 
-    private void OnDamageable()
+    private void OnDeath()
     {
         characterControl.Dead = true;
     }

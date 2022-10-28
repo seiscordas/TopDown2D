@@ -5,10 +5,18 @@ using UnityEngine;
 
 public class DeathOnDamage : MonoBehaviour, IDamageable
 {
-    public event Action DamageEvent;
+    public bool IsDead {get; private set;}
+
+    public event Action DeathEvent;
+
+    private void Awake()
+    {
+        IsDead = false;
+    }
 
     public void TakeDamage(int damage)
     {
-        DamageEvent?.Invoke();
+        IsDead = true;
+        DeathEvent?.Invoke();
     }
 }

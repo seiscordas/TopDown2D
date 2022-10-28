@@ -9,8 +9,9 @@ public class TriggerDamage : MonoBehaviour
     private int damage = 10;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable damageable = collision.GetComponent<IDamageable>();
-        if (damageable != null)
+        Debug.Log("Trigger: " + collision.name);
+        //IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TakeDamage(damage);
         }

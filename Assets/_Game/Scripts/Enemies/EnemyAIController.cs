@@ -106,6 +106,7 @@ namespace kl
                     transform.Translate(chaseSpeed * Time.fixedDeltaTime * toTarget);
             }
         }
+
         #region Attack
         IEnumerator TriggerTimerAttack()
         {
